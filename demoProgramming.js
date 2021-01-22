@@ -1,6 +1,8 @@
 var firstName, lastName, employeeId, email, jobRole, project, address = ""
-var isEmpty = false
+var isEmpty = false;
 var emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+var empDetails = []
+
 
 function fetchFieldValues() {
     firstName = document.getElementById('firstName').value
@@ -44,9 +46,12 @@ function validateForm() {
     fetchFieldValues()
     //empty field validation
     isEmpty = emptyFieldValidations()
+    //invalid email validation
     isValidEmail = emailRegexp.test(email)
+    //if all validation pass then data will be saved successfully else throw error message
     if(!isEmpty && isValidEmail && !isNaN(employeeId)){
         alert("Data saved")
+        saveDetails(firstName, lastName, employeeId, email, jobRole, project, address)
     }else if(isNaN(employeeId)){
         alert('Employee Id should be numerical')
     }else if(!isValidEmail){
@@ -55,26 +60,34 @@ function validateForm() {
     
 }
 
+function saveDetails(firstName, lastName, employeeId, email, jobRole, project, address){
+    var obj;
+    obj['firstName'] = firstName
+    obj['lastName'] = lastName
+    obj['employeeId'] = employeeId
+    obj['email'] = email
+    obj['jobRole'] = jobRole
+    obj['project'] = project
+    obj['address'] = address
+    empDetails.push(obj)
+    console.log(empDetails)
 
-
-
-
-//localstorage and session storage demo functions
-
-function submitFunction() {
-    localStorage.setItem("firstName", document.getElementById('firstName').value)
-    localStorage.setItem("lastName", document.getElementById('lastName').value)
-    var firstName = localStorage.getItem("firstName")
-    var lastName = localStorage.getItem("lastName")
-    console.log("localstorage" ,  firstName + " " + lastName)
+    var tbody = document.getElementById('empTableBody')
+    var tr = document.createElement('tr')
+        for(var key in obj){
+            var td = document.createElement('td')
+            td.innerHTML = obj[key]
+            tr.appendChild(td)
+        }
+        tbody.appendChild(tr)
 }
 
-
-
-function sessionStorageFunction() {
-    sessionStorage.setItem("firstName", document.getElementById('firstName').value)
-    sessionStorage.setItem("lastName", document.getElementById('lastName').value)
-    var firstName = sessionStorage.getItem("firstName")
-    var lastName = sessionStorage.getItem("lastName")
-    console.log("session storage", firstName + " " + lastName)
+function resetValues() {
+    document.getElementById('firstName').value = ""
+    document.getElementById('lastName').value = ""
+    document.getElementById('employeeId').value = ""
+    document.getElementById('email').value = ""
+    document.getElementById('jobRole').value = ""
+    document.getElementById('project').value = ""
+    document.getElementById('address').value = ""
 }

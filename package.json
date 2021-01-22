@@ -1,0 +1,25 @@
+{
+  "name": "javascript-project",
+  "version": "1.0.0",
+  "description": "demo projects",
+  "main": "demoProgramming.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarvis-codegeek/JavaScriptDemo.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "shashank",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jarvis-codegeek/JavaScriptDemo/issues"
+  },
+  "homepage": "https://github.com/jarvis-codegeek/JavaScriptDemo#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}
